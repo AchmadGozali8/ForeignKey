@@ -33,9 +33,25 @@ def all_data():
 @app.route("/data/<int:id>")
 def data_by_id(id):
 	member = Member.query.get(id)
-	socialmedia = SocialMedia.query.get(id)
+	social = SocialMedia.query.get(id)
 
 	return render_template("data_by_id.html",**locals())
 
+@app.route("/data/update/<int:id>",methods=["POST","GET"])
+def update(id):
+	if request.method == "POST":
+		socialmedia = SocialMedia.query.get(id)
+
+		facebook = request.form.get("facebook",None)
+		twitter = request.form.get("twitter",None)
+	
+		socialmedia.facebook = facebook
+		socialmedia.twitter = twitter           
+		db.session.add(socialmedia)
+		db.session.commit()
+		
+		return redirect("/data")	
+	socialmedia = SocialMedia.query.get(id)
+	return render_template("update.html",**locals())
 if __name__=="__main__":
 	app.run()
