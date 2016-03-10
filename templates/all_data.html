@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html>
+	<head><title>all data</title></head>
+	<body>
+		<h2>All Data</h2>
+		{% for i in member %}
+		<h3><a href="/data/{{i.id}}">{{i.nama}}</a></h3>
+		{% endfor %}
+	</body>
+</html>

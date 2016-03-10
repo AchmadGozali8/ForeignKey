@@ -16,7 +16,7 @@ class SocialMedia(db.Model):
 	__tablename__="socialmedia"
 	id = db.Column(db.Integer,primary_key=True)
 	id_member =db.Column(db.Integer,db.ForeignKey("member.id"))
-	member =db.relationship('Member',backref=db.backref("member",lazy="dynamic"))
+	member =db.relationship('Member',backref=db.backref("SocialMedia",lazy="dynamic"))
 	facebook = db.Column(db.String(180))
 	twitter = db.Column(db.String(180))
 	
