@@ -49,9 +49,19 @@ def update(id):
 		socialmedia.twitter = twitter           
 		db.session.add(socialmedia)
 		db.session.commit()
-		
-		return redirect("/data")	
+
+		return redirect("/data")
 	socialmedia = SocialMedia.query.get(id)
 	return render_template("update.html",**locals())
+@app.route("/data/delete/<int:id>",methods=["POST","GET"])
+def delete(id):
+		member = Member.query.get(id)
+		socialmedia = SocialMedia.query.get(id)
+
+		db.session.delete(member)
+		db.session.delete(socialmedia)
+		db.session.commit()
+		return redirect("/data")
+	
 if __name__=="__main__":
 	app.run()
